@@ -1,4 +1,4 @@
-import { Dashboard, Auth } from 'pages'
+import { Dashboard } from 'pages'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 const kanbanBoard: Map<string, object[]> = new Map()
@@ -16,12 +16,6 @@ function App() {
             path="/dashboard"
             element={<Dashboard lists={kanbanBoard} />}
           />
-          {/* <Route path="/signin" element={<Auth authType="signIn" />} />
-          <Route path="/signup" element={<Auth authType="signUp" />} />
-          <Route
-            path="/forgotpassword"
-            element={<Auth authType="forgotPassword" />}
-          /> */}
         </Routes>
       </Router>
     </div>
