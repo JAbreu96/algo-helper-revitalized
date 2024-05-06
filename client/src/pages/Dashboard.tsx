@@ -1,5 +1,5 @@
 interface DashboardProps {
-  lists: Map<string, Array<object>>
+  lists: Map<string, object[]>
 }
 
 export const Dashboard: React.FC<DashboardProps> = function (
@@ -8,8 +8,8 @@ export const Dashboard: React.FC<DashboardProps> = function (
   const { lists } = props
   return (
     <div>
-      {lists.get('todo')?.map((elem, i) => {
-        return <p key={i}>{i}</p>
+      {new Array(...lists.values()).map((elem, i) => {
+        return <p key={i}>{elem.title}</p>
       })}
     </div>
   )
