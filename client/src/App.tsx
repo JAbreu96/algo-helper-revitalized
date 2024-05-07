@@ -1,7 +1,12 @@
 import { Dashboard } from 'pages'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { ListObject } from 'types/project_types'
+// interface ListObject {
+//   title: string
+//   cards: Array<object>
+// }
 
-const kanbanBoard: Map<string, object[]> = new Map()
+const kanbanBoard: Map<string, ListObject> = new Map()
   .set('todo', { title: 'To Do', cards: [] })
   .set('done', { title: 'Done', cards: [] })
   .set('inProgress', { title: 'In Progress', cards: [] })

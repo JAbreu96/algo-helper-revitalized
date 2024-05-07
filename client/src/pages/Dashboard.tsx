@@ -1,5 +1,8 @@
+import { List } from 'components/Dashboard/List'
+import { ListObject } from 'types/project_types'
+
 interface DashboardProps {
-  lists: Map<string, object[]>
+  lists: Map<string, ListObject>
 }
 
 export const Dashboard: React.FC<DashboardProps> = function (
@@ -9,7 +12,13 @@ export const Dashboard: React.FC<DashboardProps> = function (
   return (
     <div>
       {new Array(...lists.values()).map((elem, i) => {
-        return <p key={i}>{elem.title}</p>
+        return (
+          <List key={elem.title} listTitle={elem.title}>
+            {elem.cards.map((list) => {
+              return <p key={list.title}>Card</p>
+            })}
+          </List>
+        )
       })}
     </div>
   )
