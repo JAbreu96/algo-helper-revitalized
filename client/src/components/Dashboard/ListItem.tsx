@@ -7,9 +7,13 @@ interface ItemProps {
 
 export const ListItem: React.FC<ItemProps> = function (props) {
   return (
-    <button data-itemid={props.id} onClick={() => props.toggleModal(props.id)}>
-      {props.title}
-      {props.createdDate.toDateString()}
+    <button
+      className="listItem"
+      data-itemid={props.id}
+      onClick={() => props.toggleModal(props.id)}
+    >
+      <p className="listItem__title">{props.title}</p>
+      <p className="listItem__date">{props.createdDate.toDateString()}</p>
     </button>
   )
 }

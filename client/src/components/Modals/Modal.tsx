@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 interface ModalProps {
   children: ReactNode[]
 }
-
+//TODO:Handle user click outside of modal
 export const Modal: React.FC<ModalProps> = function (props) {
   return (
     <div className="modal">
