@@ -1,24 +1,29 @@
+//TODO when fetching a get req for all cards, lets also find highest id, so we can update cards based off of this
 import { ListItem } from 'components/Dashboard/ListItem'
 import { List } from 'components/Dashboard/List'
 import { useState } from 'react'
 import { ListObject, Card } from 'types/project_types'
+import { CardDetailModal } from 'components/Modals/CardDetailModal'
 
 interface DashboardProps {
   lists: Map<string, ListObject>
 }
-
 export const Dashboard: React.FC<DashboardProps> = function (
   props: DashboardProps
 ): JSX.Element {
+  //States
   const [lists, updateLists] = useState(props.lists)
+  const [isModalEngaged, updateIsModalEngaged] = useState(false)
 
+  //Handlers
   const addACardToList = function (
     ev: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     key: string
   ) {
     //Update state
     const listItem: Card = {
-      title: 'New Card'
+      title: 'New Card',
+      createdDate: new Date()
     }
 
     //Grab Specific Card List and make copy
@@ -34,8 +39,20 @@ export const Dashboard: React.FC<DashboardProps> = function (
       }
 
       updateLists(newMap)
-      //TODO: Implement a Post Request to DB
+      //TODO: Post Request to DB
     }
+  }
+
+  const toggleModal = function (id: number) {
+    if (isModalEngaged) {
+      updateIsModalEngaged(false)
+      return
+    }
+
+    //TODO: Fetch specific card details to display
+
+    //change Modal State
+    updateIsModalEngaged(true)
   }
 
   return (
@@ -52,12 +69,19 @@ export const Dashboard: React.FC<DashboardProps> = function (
           >
             {list?.cards?.map((item, idx) => {
               return (
-                <ListItem key={list.title + ' ' + idx} title={item.title} />
+                <ListItem
+                  id={idx}
+                  key={list.title + ' ' + idx}
+                  title={item.title}
+                  createdDate={item.createdDate}
+                  toggleModal={toggleModal}
+                />
               )
             })}
           </List>
         )
       })}
+      {isModalEngaged ? <CardDetailModal /> : <></>}
     </main>
   )
 }

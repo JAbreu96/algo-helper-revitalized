@@ -1,5 +1,6 @@
 export interface Card {
   title: string
+  createdDate: Date
 }
 
 export interface ListObject {
