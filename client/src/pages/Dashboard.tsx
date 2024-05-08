@@ -1,3 +1,4 @@
+import { ListItem } from 'components/Dashboard/ListItem'
 import { List } from 'components/Dashboard/List'
 import { useState } from 'react'
 import { ListObject, Card } from 'types/project_types'
@@ -16,7 +17,7 @@ export const Dashboard: React.FC<DashboardProps> = function (
     key: string
   ) {
     //Update state
-    const card: Card = {
+    const listItem: Card = {
       title: 'New Card'
     }
 
@@ -24,7 +25,7 @@ export const Dashboard: React.FC<DashboardProps> = function (
     if (lists.get(key)) {
       const mutatedList = lists?.get(key)?.cards?.slice()
       //Push a new card to new list
-      mutatedList?.push(card)
+      mutatedList?.push(listItem)
       const newMap = new Map(lists)
 
       //Add new List to specific card
@@ -38,7 +39,7 @@ export const Dashboard: React.FC<DashboardProps> = function (
   }
 
   return (
-    <div>
+    <main className="dashboard">
       {new Array(...lists.keys()).map((key) => {
         const list: ListObject | undefined = lists.get(key)
 
@@ -49,12 +50,14 @@ export const Dashboard: React.FC<DashboardProps> = function (
             listTitle={list?.title}
             addCardHandler={addACardToList}
           >
-            {list?.cards?.map((list, idx) => {
-              return <p key={list.title + ' ' + idx}>Algorithm Title</p>
+            {list?.cards?.map((item, idx) => {
+              return (
+                <ListItem key={list.title + ' ' + idx} title={item.title} />
+              )
             })}
           </List>
         )
       })}
-    </div>
+    </main>
   )
 }
