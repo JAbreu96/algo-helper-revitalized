@@ -4,6 +4,7 @@ export type ListId = 'backlog' | 'todo' | 'doing' | 'done' | 'revisit'
 
 export interface Card {
   id: string
+  listId?: ListId
   title: string
   description: string
   timeCompleted: string
@@ -13,11 +14,6 @@ export interface Card {
   difficulty: Difficulty
   dataStructures: string[]
   createdAt: string
-}
-
-export interface BoardState {
-  lists: Record<ListId, string[]>
-  cards: Record<string, Card>
 }
 
 export const LIST_META: { id: ListId; label: string; color: string }[] = [
