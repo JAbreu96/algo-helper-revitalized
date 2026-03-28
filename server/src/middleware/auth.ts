@@ -3,6 +3,11 @@ import jwt from 'jsonwebtoken'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'algo-kanban-dev-secret'
 
+if (process.env.NODE_ENV === 'production' && !process.env.JWT_SECRET) {
+  console.error('FATAL: JWT_SECRET environment variable is required in production')
+  process.exit(1)
+}
+
 export interface JwtPayload {
   userId: number
   email: string
