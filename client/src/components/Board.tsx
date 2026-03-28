@@ -1,8 +1,12 @@
-import { BoardState, ListId, LIST_META } from '../types'
+import { Card, ListId, LIST_META } from '../types'
 import KanbanList from './KanbanList'
 
+interface BoardData {
+  lists: Record<ListId, Card[]>
+}
+
 interface BoardProps {
-  board: BoardState
+  board: BoardData
   onAddCard: (listId: ListId) => void
   onEditCard: (cardId: string) => void
   onDeleteCard: (cardId: string) => void
@@ -28,7 +32,7 @@ export default function Board({
           listId={list.id}
           label={list.label}
           color={list.color}
-          cards={board.lists[list.id].map((id) => board.cards[id]).filter(Boolean)}
+          cards={board.lists[list.id]}
           onAddCard={() => onAddCard(list.id)}
           onEditCard={onEditCard}
           onDeleteCard={onDeleteCard}
